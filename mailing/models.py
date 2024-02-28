@@ -15,3 +15,10 @@ class Mailing(models.Model):
     sends = models.IntegerField(default=0, verbose_name='Отправлено раз')
     emails = models.TextField(max_length=1000, verbose_name='Список адресов')
     owner = models.ForeignKey('User', on_delete=models.CASCADE(), verbose_name='Создатель рассылки')
+
+
+class Letter(models.Model):
+    name = models.CharField(max_length=200, verbose_name='Название письма')
+    title = models.CharField(max_length=200, verbose_name='Заголовок письма')
+    text = models.TextField(max_length=1000, verbose_name='Содержимое письма')
+    owner = models.ForeignKey('User', on_delete=models.CASCADE(), verbose_name='Создатель письма')
