@@ -40,8 +40,21 @@ INSTALLED_APPS = [
 
     'users',
     'mailing',
+    'blog',
 
 ]
+
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 465
+
+EMAIL_HOST_USER = 'skyprothebest@mail.ru'
+EMAIL_HOST_PASSWORD = 'L38Shb5XVGehbWNH1rZX'
+
+EMAIL_USE_SSL = True
+EMAIL_SSL_CERTFILE = None
+EMAIL_SSL_KEYFILE = None
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -107,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -121,7 +134,19 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = (BASE_DIR / 'static/',)
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
+
+MEDIA_URL = 'media/'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+LOGIN_URL = 'users'

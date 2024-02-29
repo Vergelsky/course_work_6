@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<div class="col-6 mx-auto">
+    {{user.email}}
+    <form xmlns="http://www.w3.org/1999/html" method="post">
+      {% csrf_token %}
+      {{form.as_p}}
+
+      <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <div><a href={% url 'users:login' %}>Вход</a></div>
+    </form>
+</div>
+{% endblock %}
