@@ -1,0 +1,20 @@
+<div class="card card-sm">
+    <div class="card-header d-flex justify-content-between h6">
+        <p class="m-0">{{object.title }}</p>
+    </div>
+    <div class="card-body d-flex justify-content-center" style="min-height: 340px">
+        <img class=" img-fluid img-thumbnail" src="{{object.image.url}}" style="max-height:300px">
+    </div>
+    <div class="card-body d-flex justify-content-between">
+        <p class=" m-0">{{object.text|truncatechars:40}}</p>
+    </div>
+    <div class="card-footer d-flex justify-content-center">
+        <a class="p-2 btn btn-success" href="{% url 'blog:view' object.pk %}">Открыть</a>
+        <a class="p-2 btn btn-info" href="{% url 'blog:edit' object.pk %}">Изменить</a>
+        <a class="p-2 btn btn-warning" href="{% url 'blog:delete' object.pk %}">Удалить</a>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+
+        <p class="m-0 ">Просмотров: {{object.views}}</p>
+    </div>
+</div>

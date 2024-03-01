@@ -19,9 +19,19 @@ from django.urls import path
 from django.contrib.auth.views import LoginView
 
 from blog import views, apps
+from blog.views import PostCreateView, PostListView, PostDetailView, PostUpdateView, PostDeleteView, index
 
 app_name = apps.BlogConfig.name
 
+
+
+
+
 urlpatterns = [
-    path('', LoginView.as_view(template_name='blog/blog.html'), name='blog'),
+    path('', index, name='index'),
+    path('new', PostCreateView.as_view(extra_context={'title': "Рассыльщик: Новый пост"}), name='new'),
+    path('blog', PostListView.as_view(extra_context={'title': "Рассыльщик: Блог"}), name='blog'),
+    path('view/<int:pk>/', PostDetailView.as_view(extra_context={'title': "Рассыльщик: пост"}), name='view'),
+    path('edit/<int:pk>/', PostUpdateView.as_view(extra_context={'title': "Рассыльщик: изменить"}), name='edit'),
+    path('delete/<int:pk>/', PostDeleteView.as_view(extra_context={'title': "Рассыльщик: удалить"}), name='delete'),
 ]
