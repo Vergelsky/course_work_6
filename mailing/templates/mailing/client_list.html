@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="m-0"><a href="{% url 'mailing:new_client' %}">Новый клиент</a></div>
+<ul class="row list-unstyled justify-content-center">
+    {% for object in object_list %}
+    <li class="col-5 mb-3">
+        {% include 'mailing/includs/client_card.html' %}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

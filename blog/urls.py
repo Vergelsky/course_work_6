@@ -16,9 +16,7 @@ Including another URLconf
 """
 from django.urls import path
 
-from django.contrib.auth.views import LoginView
-
-from blog import views, apps
+from blog import apps
 from blog.views import PostCreateView, PostListView, PostDetailView, PostUpdateView, PostDeleteView, index
 
 app_name = apps.BlogConfig.name

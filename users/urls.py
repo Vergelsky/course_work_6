@@ -17,7 +17,6 @@ Including another URLconf
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
-from blog import views
 from users import apps
 from users.views import RegisterView, confirm_email, ProfileView
 

@@ -15,12 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-
-from blog import views
 from mailing import apps
+from mailing.views.client_views import ClientListView, ClientCreateView, ClientDetailView, ClientUpdateView, \
+    ClientDeleteView
 
 app_name = apps.MailingConfig.name
 
 urlpatterns = [
-    # path('', views.base, name='base'),
+    path('new_client', ClientCreateView.as_view(extra_context={'title': "Рассыльщик: Новый клиент"}),
+         name='new_client'),
+    path('client/<int:pk>', ClientDetailView.as_view(extra_context={'title': "Рассыльщик: Клиент"}),
+         name='client'),
+    path('', ClientListView.as_view(extra_context={'title': "Рассыльщик: Список клиентов"}),
+         name='client_list'),
+    path('client_update/<int:pk>', ClientUpdateView.as_view(extra_context={'title': "Рассыльщик: Список клиентов"}),
+         name='client_update'),
+    path('client_confirm_delete/<int:pk>', ClientDeleteView.as_view(extra_context={'title': "Рассыльщик: Список клиентов"}),
+         name='client_confirm_delete'),
 ]
