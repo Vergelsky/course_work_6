@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<ul class="row list-unstyled justify-content-center">
+    {% for object in object_list %}
+    <li class="col-5 mb-3">
+        <div class="card card-sm">
+            <div class="card-header d-flex justify-content-between h6">
+                <p class="m-0">{{object.mailing}}</p>
+            </div>
+            <div class="card-header d-flex justify-content-between h6">
+                <p class="m-0">{{object.last_try_dt}}</p>
+            </div>
+            <div class="card-body d-flex justify-content-between">
+                <p class=" m-0" style="word-wrap: anywhere">{{object.result}}</p>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
