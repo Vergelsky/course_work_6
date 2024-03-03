@@ -18,7 +18,7 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
 from users import apps
-from users.views import RegisterView, confirm_email, ProfileView
+from users.views import RegisterView, confirm_email, ProfileView, UserDeleteView
 
 app_name = apps.UsersConfig.name
 
@@ -31,5 +31,6 @@ urlpatterns = [
     path('confirm_email/<token>/', confirm_email, name='confirm_email'),
     path('profile', ProfileView.as_view(), name='profile'),
     path('logout', LogoutView.as_view(next_page='.'), name='logout'),
+    path('delete/<int:pk>', UserDeleteView.as_view(), name='delete'),
 
 ]

@@ -15,20 +15,31 @@ class ClientForm(forms.ModelForm):
 
 
 class MailingForm(forms.ModelForm):
+
     class Meta:
         model = Mailing
-        fields = ('name', 'letter', 'period', 'send_time', 'is_active', 'clients',)
+        fields = ('name', 'letter', 'start_date', 'finish_date', 'period', 'send_time', 'status', 'clients',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        from django.forms import CheckboxInput
+
         for field_name, field in self.fields.items():
-            from django.forms import CheckboxInput
             if isinstance(field.widget, CheckboxInput):
-
                 field.widget.attrs['class'] = 'form-check'
-
             else:
                 field.widget.attrs['class'] = 'form-control'
+
+    def clean_finish_date(self):
+        if self.cleaned_data.get('finish_date'):
+            start_date = self.cleaned_data.get('start_date')
+            finish_date = self.cleaned_data.get('finish_date')
+            if finish_date > start_date:
+                return finish_date
+            else:
+                raise forms.ValidationError('Начало рассылки должно быть позже чем конец!')
+
 
 
 class LetterForm(forms.ModelForm):

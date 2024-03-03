@@ -3,15 +3,24 @@
         <p class="m-0">{{object.name}}</p>
     </div>
     <div class="card-header d-flex justify-content-between h6">
-        <p class="m-0">{{object.period}}</p>
+        <p class="m-0">Периодичность: {{object.get_period_display}}</p>
     </div>
     <div class="card-body d-flex justify-content-between">
-        <p class=" m-0" style="word-wrap: anywhere">{{object.sends}}</p>
+        <p class=" m-0" style="word-wrap: anywhere">Отправок: {{object.sends}}</p>
     </div>
     <div class="card-body d-flex justify-content-between">
-        <p class=" m-0" style="word-wrap: anywhere">{{object.is_active}}</p>
+        <p class=" m-0" style="word-wrap: anywhere">{{object.get_status_display}}</p>
+    </div>
+
+    <div class="card-body d-flex justify-content-between">
+        <p class=" m-0" style="word-wrap: anywhere">Клиенты:
+            {% for client in object.clients.all %}
+              {{ client.name }}
+            {% endfor %}</p>
     </div>
     <div class="card-footer d-flex justify-content-center">
+
+        <a class="p-2 btn btn-info" href="{% url 'mailing:mailing' object.pk %}">Открыть</a>
         <a class="p-2 btn btn-info" href="{% url 'mailing:mailing_update' object.pk %}">Изменить</a>
         <a class="p-2 btn btn-warning" href="{% url 'mailing:mailing_confirm_delete' object.pk %}">Удалить</a>
     </div>

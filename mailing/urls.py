@@ -38,6 +38,7 @@ urlpatterns = [
     path('client_confirm_delete/<int:pk>',
          ClientDeleteView.as_view(extra_context={'title': "Рассыльщик: Удалить клиента"}),
          name='client_confirm_delete'),
+
     # Рассылки
     path('new_mailing', MailingCreateView.as_view(extra_context={'title': "Рассыльщик: Новая рассылка"}),
          name='new_mailing'),
@@ -50,6 +51,7 @@ urlpatterns = [
     path('mailing_confirm_delete/<int:pk>',
          MailingDeleteView.as_view(extra_context={'title': "Рассыльщик: Удалить рассылку"}),
          name='mailing_confirm_delete'),
+
     # Письма
     path('new_letter', LetterCreateView.as_view(extra_context={'title': "Рассыльщик: Новое письмо"}),
          name='new_letter'),

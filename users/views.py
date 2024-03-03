@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 from users.forms import UserRegisterForm, UserProfileForm
 from users.models import User
 
@@ -16,7 +16,7 @@ class RegisterView(CreateView):
 def confirm_email(request, token):
     user = User.objects.filter(verification_code=token)
     if user.exists():
-        user=User.objects.get(verification_code=token)
+        user = User.objects.get(verification_code=token)
         user.is_active = True
         user.verification_code = ''
         user.save()
@@ -34,3 +34,8 @@ class ProfileView(UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+class UserDeleteView(DeleteView):
+    model = User
+    success_url = reverse_lazy("users:login")

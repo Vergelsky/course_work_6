@@ -2,6 +2,9 @@
 
 {% block content %}
 
-        {% include 'mailing/includs/mailing_card.html' %}
+    <div class="m-0"><a href="{% url 'mailing:log_list' %}">Логи этой рассылки</a></div>
+
+    {% include 'mailing/includs/mailing_card.html' %}
+
 
 {% endblock %}
