@@ -10,8 +10,12 @@
     </div>
     <div class="card-footer d-flex justify-content-center">
         <a class="p-2 btn btn-success" href="{% url 'blog:view' object.pk %}">Открыть</a>
+        {% if perms.blog.change_post') %}
         <a class="p-2 btn btn-info" href="{% url 'blog:edit' object.pk %}">Изменить</a>
+        {% endif %}
+        {% if perms.blog.delete_post') %}
         <a class="p-2 btn btn-warning" href="{% url 'blog:delete' object.pk %}">Удалить</a>
+        {% endif %}
     </div>
     <div class="card-footer d-flex justify-content-between">
 

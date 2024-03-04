@@ -19,14 +19,14 @@ class UserRegisterForm(UserCreationForm):
 
     def save(self):
         user = super().save(commit=False)
-        token = randint(100000000, 100000000000)
+        token = randint(1000, 9999)
         user.verification_code = token
         user.is_active = False
         res = send_mail('Подтверждение адреса',
                         f"Для подтверждения адреса электронной почты, пожалуйста, перейдите по ссылке"
-                        f"http://127.0.0.1:8000/users/confirm_email/{ token }",
+                        f"http://127.0.0.1:8000/users/confirm_email/{token}",
                         'skyprothebest@mail.ru',
-                        [user.email,])
+                        [user.email, ])
         user.save()
         return user
 

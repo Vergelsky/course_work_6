@@ -1,7 +1,9 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+{% if perms.blog.add_post %}
 <div class="m-0"><a href="{% url 'blog:new' %}">Новый пост</a></div>
+{% endif %}
 <ul class="row list-unstyled justify-content-center">
     {% for object in object_list %}
     <li class="col-5 mb-3">

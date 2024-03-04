@@ -18,7 +18,8 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
 from users import apps
-from users.views import RegisterView, confirm_email, ProfileView, UserDeleteView
+from users.views import RegisterView, confirm_email, ProfileView, UserDeleteView, forgot_password, toggle, \
+    user_list
 
 app_name = apps.UsersConfig.name
 
@@ -32,5 +33,8 @@ urlpatterns = [
     path('profile', ProfileView.as_view(), name='profile'),
     path('logout', LogoutView.as_view(next_page='.'), name='logout'),
     path('delete/<int:pk>', UserDeleteView.as_view(), name='delete'),
+    path('forgot', forgot_password, name='forgot'),
+    path('user_list', user_list, name='user_list'),
+    path('toggle/<int:pk>', toggle, name='toggle'),
 
 ]

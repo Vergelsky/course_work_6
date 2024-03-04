@@ -15,7 +15,7 @@
     <div class="card-body d-flex justify-content-between">
         <p class=" m-0" style="word-wrap: anywhere">Клиенты:
             {% for client in object.clients.all %}
-              {{ client.name }}
+            {{ client.name }}
             {% endfor %}</p>
     </div>
     <div class="card-footer d-flex justify-content-center">
@@ -23,5 +23,16 @@
         <a class="p-2 btn btn-info" href="{% url 'mailing:mailing' object.pk %}">Открыть</a>
         <a class="p-2 btn btn-info" href="{% url 'mailing:mailing_update' object.pk %}">Изменить</a>
         <a class="p-2 btn btn-warning" href="{% url 'mailing:mailing_confirm_delete' object.pk %}">Удалить</a>
+        {% if user.is_manager %}
+        <form method="POST" action="{% url 'mailing:mailing_list_toggle' object.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value="{{ object.pk }}">
+            <button type="submit"
+                {% if object.status == 'started' %} class="p-2 btn btn-warning">Остановить
+                {% else %}                       class="p-2 btn btn-success">Запустить
+            </button>
+            {% endif %}
+        </form>
+        {% endif %}
     </div>
 </div>

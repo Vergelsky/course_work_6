@@ -1,6 +1,7 @@
 from django.utils import timezone
 from django.db import models
 
+from users.models import User
 
 
 # Create your models here.
@@ -46,6 +47,7 @@ class Client(models.Model):
     name = models.CharField(max_length=200, verbose_name='ФИО')
     about = models.TextField(max_length=600, verbose_name='Комментарий', blank=True)
     email = models.EmailField(unique=True, verbose_name='Почта')
+    owner = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='Создатель', blank=True, null=True)
 
     def __str__(self):
         return f'Клиент {self.name}'

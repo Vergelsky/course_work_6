@@ -6,10 +6,13 @@ from blog.forms import PostForm
 from blog.models import Post
 from django.urls import reverse_lazy, reverse
 
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
 
 # Create your views here.
-class PostCreateView(CreateView):
+class PostCreateView(PermissionRequiredMixin, CreateView):
     model = Post
+    permission_required = 'blog.add_post'
     form_class = PostForm
     success_url = reverse_lazy('blog:blog')
 
@@ -33,19 +36,19 @@ class PostDetailView(DetailView):
         return self.object
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'blog/post_update.html'
     model = Post
-    # permission_required = 'blog.change_blog'
+    permission_required = 'blog.change_blog'
     form_class = PostForm
-    # success_url = reverse_lazy("blog:blog")
 
     def get_success_url(self):
         return reverse('blog:view', args=[self.object.pk])
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(PermissionRequiredMixin, DeleteView):
     model = Post
+    permission_required = 'blog.delete_post'
     success_url = reverse_lazy("blog:blog")
 
 def index(request):

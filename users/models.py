@@ -8,3 +8,4 @@ class User(AbstractUser):
     about = models.CharField(max_length=600, verbose_name='О себе', blank=True, null=True)
     is_manager = models.BooleanField(default=False, verbose_name='Это менеджер')
     verification_code = models.CharField(max_length=50, verbose_name='код верификации пользователя', null=True, blank=True)
+

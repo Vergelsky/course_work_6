@@ -24,6 +24,9 @@
                 <li><a href="{% url 'mailing:mailing_list' %}" class="nav-link px-2 text-white">Рассылки</a></li>
                 <li><a href="{% url 'mailing:client_list' %}" class="nav-link px-2 text-white">Клиенты</a></li>
                 <li><a href="{% url 'mailing:letter_list' %}" class="nav-link px-2 text-white">Письма</a></li>
+                {% if user.is_manager %}
+                <li><a href="{% url 'users:user_list' %}" class="nav-link px-2 text-white">Пользователи</a></li>
+                {% endif %}
             </ul>
 
             <div class="text-end">
