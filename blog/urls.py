@@ -18,15 +18,13 @@ from django.urls import path
 
 from blog import apps
 from blog.views import PostCreateView, PostListView, PostDetailView, PostUpdateView, PostDeleteView, index
+from django.views.decorators.cache import cache_page
 
 app_name = apps.BlogConfig.name
 
 
-
-
-
 urlpatterns = [
-    path('', index, name='index'),
+    path('', cache_page(60)(index), name='index'),
     path('new', PostCreateView.as_view(extra_context={'title': "Рассыльщик: Новый пост"}), name='new'),
     path('blog', PostListView.as_view(extra_context={'title': "Рассыльщик: Блог"}), name='blog'),
     path('view/<int:pk>/', PostDetailView.as_view(extra_context={'title': "Рассыльщик: пост"}), name='view'),
