@@ -2,24 +2,10 @@
 
 config проекта лежит в папке mailinger
 
-Нужно прописать свои настройки почты, для отправки письма подтверждения регистрации:
+Нужно прописать свои переменные окружения в файле .env, по макету из env_example
 
-или использовать эти
+Установить зависимости из requirements.txt
 
-в settings.py
+pip install -r requirements.txt
 
-EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
-
-EMAIL_HOST = 'smtp.mail.ru'
-
-EMAIL_PORT = 465
-
-EMAIL_HOST_USER = 'skyprothebest@mail.ru'
-
-EMAIL_HOST_PASSWORD = 'L38Shb5XVGehbWNH1rZX'
-
-EMAIL_USE_SSL = True
-
-EMAIL_SSL_CERTFILE = None
-
-EMAIL_SSL_KEYFILE = None
+База данных SQLite, готова к работе из коробки

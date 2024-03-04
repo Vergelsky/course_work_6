@@ -3,6 +3,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.core.mail import send_mail
 
+from blog.services import send_new_password_email
 from mailinger.settings import EMAIL_HOST_USER
 from users.forms import UserRegisterForm, UserProfileForm
 from users.models import User
@@ -75,16 +76,7 @@ def forgot_password(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         try:
-            user = User.objects.get(email=email)
-            new_password = User.objects.make_random_password(length=12)
-            send_mail(
-                subject='Новый пароль от рассыльщика',
-                message=f'Вот он: {new_password}',
-                from_email=EMAIL_HOST_USER,
-                recipient_list=[user.email]
-            )
-            user.set_password(new_password)
-            user.save()
+            send_new_password_email(email)
             return redirect(reverse('users:login'))
         except Exception as ex:
             message = 'Такой почты не зарегистрировано', ex

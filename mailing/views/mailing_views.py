@@ -35,7 +35,7 @@ class MailingDetailView(LoginRequiredMixin, DetailView):
             raise Http404
 
 
-class MailingListView(ListView):
+class MailingListView(LoginRequiredMixin, ListView):
     model = Mailing
 
     def post(self, request, *args, **kwargs):

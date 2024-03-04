@@ -33,7 +33,7 @@ class ClientDetailView(LoginRequiredMixin, DetailView):
             raise Http404
 
 
-class ClientListView(ListView):
+class ClientListView(LoginRequiredMixin, ListView):
     model = Client
 
     def get_queryset(self):
