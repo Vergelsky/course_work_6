@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="m-0"><a href="{% url 'mailing:new_mailing' %}">Новая рассылка</a></div>
-<div class="m-0"><a href="{% url 'mailing:logs' %}">Логи</a></div>
+<div class="m-0"><a href="{% url 'mailing:log_list' %}">Логи</a></div>
 <ul class="row list-unstyled justify-content-center">
     {% for object in object_list %}
     <li class="col-5 mb-3">

@@ -17,8 +17,8 @@ class LetterCreateView(LoginRequiredMixin, CreateView):
         return reverse('mailing:letter', args=[self.object.pk])
 
     def form_valid(self, form):
-        new_post = form.save()
-        new_post.author = self.request.user
+        new_letter = form.save()
+        new_letter.owner = self.request.user
         return super().form_valid(form)
 
 

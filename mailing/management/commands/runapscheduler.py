@@ -14,7 +14,7 @@ import pytz
 from django.core.mail import send_mail
 
 from mailing.models import Mailing, Log
-from mailinger.settings import TIME_ZONE
+from mailinger.settings import TIME_ZONE, EMAIL_HOST_USER
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +23,7 @@ def send_mailing(mailing):
     try:
         result = send_mail(subject=mailing.letter.title,
                            message=mailing.letter.text,
-                           from_email='skyprothebest@mail.ru',
+                           from_email=EMAIL_HOST_USER,
                            recipient_list=[client.email for client in mailing.clients.all()])
         return result
     except Exception as ex:
@@ -37,13 +37,14 @@ def send_active_mailings():
                 if mailing.start_date < datetime.date.today():  # А дата начала - в прошлом
                     if datetime.datetime.now().time() > mailing.send_time:  # И время отправки уже настало
                         log = Log.objects.filter(mailing=mailing)  # Ищем логи от этой рассылки
-                        if log.exists():  # Если они есть
+                        if log.filter(result='success').exists():  # Если они есть и не все провальные
                             # То берём логи с успешным результатом, сортируем по убыванию и берем верхний в списке
                             last_success_log = log.filter(result='success').order_by('-last_try_dt').first()
                             # Из него узнаём дату с последней рассылки. Времени с последней рассылки прошло:
                             past_time = datetime.date.today().day - last_success_log.last_try_dt.replace(tzinfo=None).day
                             # И смотрим - если времени прошло больше чем частота рассылки
                             if past_time >= {'day': 1, 'week': 7, 'month': 30}.get(mailing.period):
+                                print(111234567890)
                                 # То отправляем письмо клиентам и сохраняем логи
                                 result = send_mailing(mailing)
                                 if result: mailing.sends += 1
@@ -100,7 +101,7 @@ class Command(BaseCommand):
 
         scheduler.add_job(
             send_active_mailings,
-            trigger=CronTrigger(second="*/10"),  # Every 10 minutes
+            trigger=CronTrigger(second="*/50"),  # Every 50 sec
             id="send_active_mailings",  # The `id` assigned to each job MUST be unique
             max_instances=1,
             replace_existing=True,

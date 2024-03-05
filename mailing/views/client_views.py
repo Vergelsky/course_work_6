@@ -14,8 +14,8 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
     form_class = ClientForm
 
     def form_valid(self, form):
-        client = form.save()
-        client.owner = self.request.user
+        new_client = form.save()
+        new_client.owner = self.request.user
         return super().form_valid(form)
 
     def get_success_url(self):

@@ -28,7 +28,7 @@ class Mailing(models.Model):
 
 
 class Log(models.Model):
-    last_try_dt = models.DateTimeField(default=timezone.now(), verbose_name='Время последней рассылки')
+    last_try_dt = models.DateTimeField(auto_now=True, verbose_name='Время последней рассылки')
     result = models.CharField(max_length=600, verbose_name='Результаты выполнения')
     mailing = models.ForeignKey('mailing.Mailing', on_delete=models.CASCADE, verbose_name='Рассылка')
 

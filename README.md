@@ -6,6 +6,9 @@ config проекта лежит в папке mailinger
 
 Установить зависимости из requirements.txt
 
+создать суперюзера командой 
+  python manage.py csu
+
 pip install -r requirements.txt
 
 База данных SQLite, готова к работе из коробки

@@ -10,3 +10,13 @@ EMAIL_HOST_USER = 'youemail@mail.ru'
 EMAIL_HOST_PASSWORD = 'sfdkwenne&fvb22ksjhd'
 
 DJANGO_SECRET_KEY = 'django-insecure-&ae_fdfh3&hkjfuh2**82hfjdfuh23=dq_l1*sq'
+
+DB_ENGINE: 'django.db.backends.postgresql_psycopg2',
+DB_NAME: 'mailinger',  # Название БД
+DB_USER: 'postgres',  # Пользователь для подключения
+DB_PASSWORD: '1234',  # Пароль для этого пользователя
+
+SUPERUSER_EMAIL='first_admin@sky.pro',
+SUPERUSER_FIRST_NAME='Admin',
+SUPERUSER_LAST_NAME='First',
+SUPERUSER_PASSWORD='1QAZ2WER'

@@ -20,8 +20,8 @@ class MailingCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
 
-        new_post = form.save()
-        new_post.author = self.request.user
+        new_mailing = form.save()
+        new_mailing.owner = self.request.user
         return super().form_valid(form)
 
 
